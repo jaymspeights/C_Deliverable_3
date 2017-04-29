@@ -32,11 +32,15 @@ void log2file(char buff[]) {
 }
 
 int main(int argc, char *argv[]) {
-     int sockfd, portno;
+     int sockfd, portno = 9999;
      int buffer_length = 256;
      char buffer[buffer_length];
      struct sockaddr_in serv_addr;
      int n, pid;
+     if(argv.length == 3){
+     	char* if_port = argv[1];
+     	int portno = argv[2] - '0';
+     }
 
      //catches SIGCHLD signal (child dies) and calls SigCatcher
      signal(SIGCHLD,SigCatcher);
@@ -47,7 +51,7 @@ int main(int argc, char *argv[]) {
         error("ERROR opening socket");
 
      //hard-coded port for server -> log_server communication
-     portno = 9999;
+
 
      //init server details
      bzero((char *) &serv_addr, sizeof(serv_addr));
