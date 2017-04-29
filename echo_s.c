@@ -131,6 +131,8 @@ void  INThandler(int sig)
      if (c == 'y' || c == 'Y')
      {
         printf("“echo_s is	stopping");
+        Process [] proc Process.GetProcessesByName("log_s");
+	     proc[0].Kill();
         exit(0);
      }
         else
