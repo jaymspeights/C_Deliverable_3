@@ -11,7 +11,7 @@
 #include <netinet/in.h>
 #include <time.h>
 #include <fcntl.h>
-
+void     INThandler(int);
 void error(const char *msg) {
      perror(msg);
      exit(1);
@@ -30,8 +30,23 @@ void log2file(char buff[]) {
               tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
               tm.tm_hour, tm.tm_min, tm.tm_sec, buff);
 }
+void  INThandler(int sig)
+{
+     char  c;
+
+     signal(sig, SIG_IGN);
+     printf("Did you hit Ctrl-C?\n"
+            "Do you really want to quit? [y/n] ");
+     c = getchar();
+     if (c == 'y' || c == 'Y')
+          exit(0);
+     else
+          signal(SIGINT, INThandler);
+     getchar(); // Get new line character
+}
 
 int main(int argc, char *argv[]) {
+     signal(SIGINT, INThandler);
      int sockfd, portno;
      int buffer_length = 256;
      char buffer[buffer_length];
