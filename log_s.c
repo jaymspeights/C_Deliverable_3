@@ -38,8 +38,9 @@ int main(int argc, char *argv[]) {
      struct sockaddr_in serv_addr;
      int n, pid;
      if(argv.length == 3){
-     	char* if_port = argv[1];
-     	int portno = argv[2] - '0';
+	if(argv[1] == '-path';{
+     		int portno = atoi(argv[2]);
+	}
      }
 
      //catches SIGCHLD signal (child dies) and calls SigCatcher
