@@ -16,12 +16,14 @@
 #include <unistd.h>
 #include <errno.h>
 #include "echo_s_functions.c"
+void     INThandler(int); //header for catching ctrl c command function.
+
 
 int main(int argc, char *argv[]) {
      //buffer for recieved messages
      int buffer_length = 256;
      char buffer[buffer_length];
-
+      signal(SIGINT, INThandler); // to catch the ctrl c key
      int tcp_fd, udp_fd, newsockfd, portno;
      socklen_t clilen;
      struct sockaddr_in serv_addr, cli_addr;
@@ -107,6 +109,7 @@ int main(int argc, char *argv[]) {
               if ((pid = fork()) == 0)
               {
                    doStuffUDP(udp_fd, buffer, buffer_length);
+                  
                    exit(0);
               }
         }
@@ -114,4 +117,25 @@ int main(int argc, char *argv[]) {
      close(tcp_fd);
      close(udp_fd);
      return 0;
+}
+
+
+// catches the ctrl c command and prompts with a message and asks if they want to quit.
+void  INThandler(int sig)
+{
+     char  c;
+     signal(sig, SIG_IGN);
+     printf("Did you hit Ctrl-C?\n"
+            "Do you really want to quit? [y/n] ");
+     c = getchar();
+     if (c == 'y' || c == 'Y')
+     {
+        printf("“echo_s is	stopping");
+        Process [] proc Process.GetProcessesByName("log_s");
+	     proc[0].Kill();
+        exit(0);
+     }
+        else
+          signal(SIGINT, INThandler);
+     getchar(); // Get new line character
 }
