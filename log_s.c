@@ -94,6 +94,7 @@ int main(int argc, char *argv[]) {
           }
           length = -1; //parent process
      }
+     console.log("echo_s is stopping");
      close(sockfd);
      return 0;
 }
