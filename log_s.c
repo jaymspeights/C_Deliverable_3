@@ -46,19 +46,18 @@ void  INThandler(int sig)
 }
 
 int main(int argc, char *argv[]) {
-<<<<<<< HEAD
      int sockfd, portno = 9999;
-=======
      signal(SIGINT, INThandler);
      int sockfd, portno;
->>>>>>> bd8b5f77cc937d186d138561db1606732199cdcc
      int buffer_length = 256;
      char buffer[buffer_length];
      struct sockaddr_in serv_addr;
      int n, pid;
-     if(argv.length == 3){
-	if(argv[1] == '-path';{
-     		int portno = atoi(argv[2]);
+     if(argc > 1){
+     	for(int i = 0; i < argc-1; i++){
+		if(strcmp(argv[i], "-port"){
+			port = atoi(argv[i+1]);
+		}
 	}
      }
 
